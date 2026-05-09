@@ -123,8 +123,8 @@ html,body{
 }
 .qbtn:active{background:#f0f9f4;}
 .qicon{
-  width:48px;height:48px;border-radius:14px;
-  display:flex;align-items:center;justify-content:center;font-size:20px;
+  width:48px;height:48px;border-radius:50%; /* 네모에서 둥근 아이콘으로 변경 */
+  display:flex;align-items:center;justify-content:center;font-size:22px;
 }
 .qicon.g{background:#e8f8f0;color:#1a7a45;}
 .qicon.b{background:#e6f2ff;color:#0d5fd4;}
@@ -155,7 +155,8 @@ html,body{
   border:1px solid #eee;margin-bottom:10px;
 }
 .card-row{display:flex;align-items:center;gap:10px;}
-.ci{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.ci{width:40px;height:40px;border-radius:50%; /* 네모에서 둥근 아이콘으로 변경 */
+display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
 .ct{font-size:13px;font-weight:600;color:#222;}
 .cs{font-size:11px;color:#888;margin-top:2px;}
 .ca{font-size:14px;font-weight:700;color:#1a7a45;margin-left:auto;}
@@ -186,7 +187,8 @@ html,body{
 /* 내역 아이템 */
 .tx{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #f0f0f0;}
 .tx:last-child{border-bottom:none;}
-.txi{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.txi{width:38px;height:38px;border-radius:50%; /* 네모에서 둥근 아이콘으로 변경 */
+display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
 .txn{font-size:13px;font-weight:600;color:#222;}
 .txd{font-size:11px;color:#aaa;margin-top:2px;}
 .txa{font-size:14px;font-weight:700;margin-left:auto;color:#222;}
@@ -291,7 +293,8 @@ html,body{
 
 /* 메인 버튼 */
 .btn-main{
-  width:100%;padding:15px;border-radius:14px;border:none;
+  width:100%;padding:15px;border-radius:12px; /* 충전창 모서리와 구별되도록 둥글기 소폭 조정 */
+  border:none;
   background:linear-gradient(135deg,#1a7a45,#0d5fd4);
   color:white;font-size:15px;font-weight:700;
   cursor:pointer;font-family:inherit;
@@ -300,7 +303,7 @@ html,body{
 }
 .btn-main:active{opacity:0.9;transform:scale(0.98);}
 .btn-sec{
-  width:100%;padding:13px;border-radius:14px;
+  width:100%;padding:13px;border-radius:12px;
   border:1.5px solid #1a7a45;background:white;
   color:#1a7a45;font-size:14px;font-weight:700;
   cursor:pointer;font-family:inherit;
@@ -364,22 +367,24 @@ html,body{
 }
 #charge-modal.open{display:flex;}
 .charge-sheet{
-  background:white;width:100%;max-width:480px;
-  border-radius:20px 20px 0 0;padding:24px 20px calc(env(safe-area-inset-bottom,0px)+24px);
+  background:white;
+  width:100%; 
+  max-width:100%; /* 너비 제한 해제 (더 넓게) */
+  border-radius:36px 36px 0 0; /* 곡률을 더 크게 주어 버튼 모서리와의 답답함 해소 */
+  padding:32px 24px calc(env(safe-area-inset-bottom,0px)+32px); /* 여백 확대 */
   animation:slideUp 0.28s ease;
 }
 @keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
-.sheet-handle{width:36px;height:4px;background:#ddd;border-radius:2px;margin:0 auto 20px;}
-.sheet-title{font-size:16px;font-weight:700;color:#222;margin-bottom:4px;}
-.sheet-sub{font-size:13px;color:#888;margin-bottom:20px;}
-.charge-amount-display{font-size:28px;font-weight:900;color:#1a7a45;text-align:right;padding:10px 0;border-bottom:2px solid #1a7a45;margin-bottom:16px;letter-spacing:-1px;}
-.charge-benefit{display:flex;justify-content:space-between;font-size:13px;color:#555;margin-bottom:20px;}
+.sheet-handle{width:36px;height:4px;background:#ddd;border-radius:2px;margin:0 auto 24px;}
+.sheet-title{font-size:18px;font-weight:700;color:#222;margin-bottom:6px;}
+.sheet-sub{font-size:13px;color:#888;margin-bottom:24px;}
+.charge-amount-display{font-size:28px;font-weight:900;color:#1a7a45;text-align:right;padding:10px 0;border-bottom:2px solid #1a7a45;margin-bottom:20px;letter-spacing:-1px;}
+.charge-benefit{display:flex;justify-content:space-between;font-size:14px;color:#555;margin-bottom:24px;}
 .charge-benefit span{font-weight:700;color:#1a7a45;}
 </style>
 </head>
 <body>
 
-<!-- ══ 인트로 ══ -->
 <div id="intro">
   <div class="intro-logo">착한<span>고용</span></div>
   <div class="intro-sub">광주 서구청 소상공인<br>경영비 스마트 지원 플랫폼</div>
@@ -393,10 +398,8 @@ html,body{
   <button class="intro-skip" onclick="skipIntro()">건너뛰기</button>
 </div>
 
-<!-- ══ 앱 본체 ══ -->
 <div id="app">
 
-  <!-- 홈 -->
   <div class="screen active" id="sc-home">
     <div class="app-header">
       <div class="header-row">
@@ -493,7 +496,6 @@ html,body{
     </div>
   </div>
 
-  <!-- 집행(결제) -->
   <div class="screen" id="sc-pay">
     <div class="pay-header">
       <div class="pay-top">
@@ -510,7 +512,6 @@ html,body{
     <div class="pay-body" id="pay-body"></div>
   </div>
 
-  <!-- OTP -->
   <div class="screen" id="sc-otp">
     <div class="pay-header">
       <div class="pay-top">
@@ -525,7 +526,7 @@ html,body{
         <div style="font-size:12px;color:#1a7a45;margin-top:4px;">수취인 단말로 OTP를 전송했습니다</div>
       </div>
       <div class="otp-card">
-        <div class="otp-lbl">일회성 보안 토큰 (250)</div>
+        <div class="otp-lbl">일회성 보안 토큰</div>
         <div class="otp-num" id="otp-num">483921</div>
         <div class="otp-tmr" id="otp-tmr">유효시간 04:58</div>
       </div>
@@ -542,7 +543,6 @@ html,body{
     </div>
   </div>
 
-  <!-- 완료 -->
   <div class="screen" id="sc-done">
     <div class="done-wrap">
       <div class="done-icon"><i class="ti ti-circle-check"></i></div>
@@ -559,7 +559,6 @@ html,body{
     </div>
   </div>
 
-  <!-- 자격 심사 -->
   <div class="screen" id="sc-qualify">
     <div class="app-header">
       <div class="header-row">
@@ -577,32 +576,32 @@ html,body{
       <div class="card">
         <div class="chk-step">
           <div class="chk-num done"><i class="ti ti-check" style="font-size:13px"></i></div>
-          <div class="chk-info"><div class="chk-t">사업자 정보 조회 (국세청 310)</div><div class="chk-d">정상 영업 중 · 업종: 음료·카페</div></div>
+          <div class="chk-info"><div class="chk-t">사업자 정보 조회 (국세청)</div><div class="chk-d">정상 영업 중 · 업종: 음료·카페</div></div>
           <div class="chk-s">완료</div>
         </div>
         <div class="chk-step">
           <div class="chk-num done"><i class="ti ti-check" style="font-size:13px"></i></div>
-          <div class="chk-info"><div class="chk-t">매출 규모 파라미터 적용 (211)</div><div class="chk-d">연매출 1.1억 · 2구간 · 한도 120만원/월</div></div>
+          <div class="chk-info"><div class="chk-t">매출 규모 기준 확인</div><div class="chk-d">연매출 1.1억 · 2구간 · 한도 120만원/월</div></div>
           <div class="chk-s">완료</div>
         </div>
         <div class="chk-step">
           <div class="chk-num done"><i class="ti ti-check" style="font-size:13px"></i></div>
-          <div class="chk-info"><div class="chk-t">4대 보험 납부 확인 (보험공단 320)</div><div class="chk-d">고용보험 정상 납부 · 상시 근로자 2명</div></div>
+          <div class="chk-info"><div class="chk-t">4대 보험 납부 확인 (국민건강보험공단)</div><div class="chk-d">고용보험 정상 납부 · 상시 근로자 2명</div></div>
           <div class="chk-s">완료</div>
         </div>
         <div class="chk-step">
           <div class="chk-num done"><i class="ti ti-check" style="font-size:13px"></i></div>
-          <div class="chk-info"><div class="chk-t">가족 근로 실질 검증 (231)</div><div class="chk-d">배우자 홍춘향 · 고용보험 납부 이력 확인</div></div>
+          <div class="chk-info"><div class="chk-t">가족 근로 실질 검증</div><div class="chk-d">배우자 김ㅇㅇ · 고용보험 납부 이력 확인</div></div>
           <div class="chk-s">완료</div>
         </div>
         <div class="chk-step">
           <div class="chk-num done"><i class="ti ti-check" style="font-size:13px"></i></div>
-          <div class="chk-info"><div class="chk-t">조세 체납 여부 확인 (312)</div><div class="chk-d">국세·지방세 미납 없음 · 페널티 없음</div></div>
+          <div class="chk-info"><div class="chk-t">조세 체납 여부 확인</div><div class="chk-d">국세·지방세 미납 없음 · 페널티 없음</div></div>
           <div class="chk-s">완료</div>
         </div>
         <div class="chk-step" style="border-bottom:none">
           <div class="chk-num done"><i class="ti ti-check" style="font-size:13px"></i></div>
-          <div class="chk-info"><div class="chk-t">차등 지원 한도 확정 (S150)</div><div class="chk-d">고용 기여도 상 · 월 한도 120만원 확정</div></div>
+          <div class="chk-info"><div class="chk-t">차등 지원 한도 확정</div><div class="chk-d">고용 기여도 상 · 월 한도 120만원 확정</div></div>
           <div class="chk-s">승인</div>
         </div>
       </div>
@@ -630,7 +629,6 @@ html,body{
     </div>
   </div>
 
-  <!-- 내역 -->
   <div class="screen" id="sc-history">
     <div class="app-header">
       <div class="header-row">
@@ -653,12 +651,12 @@ html,body{
       <div class="card">
         <div class="tx">
           <div class="txi" style="background:#e8f8f0"><i class="ti ti-user" style="color:#1a7a45"></i></div>
-          <div><div class="txn">박민준 (인건비)</div><div class="txd">05.08 · OTP 인증 완료 · <span class="badge bg">정상</span></div></div>
+          <div><div class="txn">박ㅇㅇ (인건비)</div><div class="txd">05.08 · OTP 인증 완료 · <span class="badge bg">정상</span></div></div>
           <div style="text-align:right"><div class="txa">-180,000원</div><div class="txs">절감 36,000원</div></div>
         </div>
         <div class="tx">
           <div class="txi" style="background:#e8f8f0"><i class="ti ti-user" style="color:#1a7a45"></i></div>
-          <div><div class="txn">홍춘향 (배우자·인건비)</div><div class="txd">05.08 · 4대보험 검증 완료 · <span class="badge bg">가족 인증</span></div></div>
+          <div><div class="txn">김ㅇㅇ (가족·인건비)</div><div class="txd">05.08 · 4대보험 검증 완료 · <span class="badge bg">가족 인증</span></div></div>
           <div style="text-align:right"><div class="txa">-120,000원</div><div class="txs">절감 24,000원</div></div>
         </div>
         <div class="tx">
@@ -683,7 +681,6 @@ html,body{
     </div>
   </div>
 
-  <!-- 마이페이지 -->
   <div class="screen" id="sc-mypage">
     <div class="prof-header">
       <div class="prof-av"><i class="ti ti-user"></i></div>
@@ -710,7 +707,6 @@ html,body{
     </div>
   </div>
 
-  <!-- 하단 네비 -->
   <div class="bottom-nav">
     <button class="nav-btn on" id="nb-home" onclick="goSc('home')"><i class="ti ti-home"></i>홈</button>
     <button class="nav-btn" id="nb-pay" onclick="goSc('pay')"><i class="ti ti-send"></i>집행</button>
@@ -720,7 +716,6 @@ html,body{
   </div>
 </div>
 
-<!-- 충전 모달 -->
 <div id="charge-modal" onclick="closeCharge(event)">
   <div class="charge-sheet" onclick="event.stopPropagation()">
     <div class="sheet-handle"></div>
@@ -740,13 +735,12 @@ html,body{
       <span id="charge-benefit-amt">+ 0원</span>
     </div>
     <button class="btn-main" id="charge-confirm-btn" onclick="confirmCharge()">충전하기</button>
-    <div style="text-align:center;margin-top:10px;">
+    <div style="text-align:center;margin-top:16px;">
       <button onclick="closeCharge()" style="border:none;background:none;color:#aaa;font-size:13px;cursor:pointer;font-family:inherit;">취소</button>
     </div>
   </div>
 </div>
 
-<!-- 토스트 -->
 <div id="toast"></div>
 
 <script>
@@ -799,9 +793,9 @@ function renderPayForm(t) {
     '인건비': `
       <div><div class="fl">수취인 (직원)</div>
       <select class="fselect" id="f-recipient">
-        <option>박민준 (정규직)</option>
-        <option>이수진 (파트타임)</option>
-        <option>홍춘향 (배우자·가족 근로)</option>
+        <option>박ㅇㅇ (정규직)</option>
+        <option>이ㅇㅇ (파트타임)</option>
+        <option>김ㅇㅇ (가족 근로)</option>
       </select></div>
       <div><div class="fl">집행 금액</div>
       <div class="amount-wrap"><span class="curr">₩</span>
@@ -811,16 +805,16 @@ function renderPayForm(t) {
       <button class="btn-main" onclick="tryPay('인건비')">집행 요청 → OTP 인증</button>`,
 
     '임대료': `
-      <div><div class="fl">임대차 계약 정보 (232 검증)</div>
+      <div><div class="fl">임대차 계약 정보 검증</div>
       <select class="fselect">
-        <option>화정동 55-2 · 임대인: 김건물 (건축물대장 일치)</option>
+        <option>화정동 55-2 · 임대인: 박ㅇㅇ (건축물대장 일치)</option>
       </select></div>
       <div><div class="fl">집행 금액</div>
       <div class="amount-wrap"><span class="curr">₩</span>
       <input class="finput" type="number" id="f-amount" value="500000"></div></div>
       <div class="info-box"><i class="ti ti-shield-check"></i>
       <div class="info-txt"><strong>임대차 정합성 검증 완료</strong><br>건축물 대장 소유주 = 계약서 임대인. 직접 송금 승인 가능합니다.</div></div>
-      <button class="btn-main" onclick="tryPay('임대료')">임대료 집행 → OTP 인증(250)</button>`,
+      <button class="btn-main" onclick="tryPay('임대료')">임대료 집행 → OTP 인증</button>`,
 
     '공과금': `
       <div><div class="fl">납부 기관</div>
@@ -878,7 +872,7 @@ function tryPay(cat) {
   const amt = amtEl ? parseInt(amtEl.value) || 0 : 0;
   const rMap = {
     '인건비': (document.getElementById('f-recipient') || {}).value || '직원',
-    '임대료': '김건물 (임대인)',
+    '임대료': '건물주 박ㅇㅇ',
     '공과금': '한국전력',
     '원재료': '서구 식자재마트'
   };
