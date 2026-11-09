@@ -148,6 +148,26 @@ html,body{width:100%;height:100%;font-family:'Noto Sans KR',sans-serif;backgroun
 .charge-amount-display{font-size:28px;font-weight:900;color:#1a7a45;text-align:right;padding:10px 0;border-bottom:2px solid #1a7a45;margin-bottom:20px;letter-spacing:-1px;}
 .charge-benefit{display:flex;justify-content:space-between;font-size:14px;color:#555;margin-bottom:24px;}
 .charge-benefit span{font-weight:700;color:#1a7a45;}
+
+/* 착한고용 모바일 고정: PC에서는 최대 480px, 모바일에서는 화면 너비 */
+html, body {
+  width: 100%;
+  background: #eef2f5;
+}
+#app, #intro, #charge-modal {
+  left: 50%;
+  right: auto;
+  width: 100%;
+  max-width: 480px;
+  height: 100dvh;
+  transform: translateX(-50%);
+}
+#app {
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+#toast {
+  max-width: min(456px, calc(100vw - 24px));
+}
 </style>
 </head>
 <body>
