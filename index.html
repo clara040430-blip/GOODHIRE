@@ -9,24 +9,10 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{width:100%;height:100%;font-family:'Noto Sans KR',sans-serif;background:#f0f9f4;overflow:hidden;}
-#intro{position:fixed;inset:0;background:linear-gradient(145deg,#1a7a45 0%,#0d5fd4 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.6s ease,transform 0.6s ease;}
-#intro.fade-out{opacity:0;transform:scale(1.04);pointer-events:none;}
-.intro-logo{font-size:52px;font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:10px;}
-.intro-logo span{color:#b3f7d8;}
-.intro-sub{font-size:15px;color:rgba(255,255,255,0.82);margin-bottom:40px;text-align:center;line-height:1.6;padding:0 32px;}
-.intro-features{display:flex;flex-direction:column;gap:12px;width:100%;max-width:340px;padding:0 24px;}
-.intro-feat{background:rgba(255,255,255,0.13);border:1px solid rgba(255,255,255,0.22);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;color:white;animation:featIn 0.5s ease both;}
-.intro-feat:nth-child(1){animation-delay:0.2s}
-.intro-feat:nth-child(2){animation-delay:0.4s}
-.intro-feat:nth-child(3){animation-delay:0.6s}
-.intro-feat:nth-child(4){animation-delay:0.8s}
-@keyframes featIn{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
-.intro-feat i{font-size:22px;flex-shrink:0;}
-.intro-feat-text .ft{font-size:13px;font-weight:700;}
-.intro-feat-text .fd{font-size:11px;opacity:0.75;margin-top:2px;}
-.intro-bar{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);width:200px;height:4px;background:rgba(255,255,255,0.2);border-radius:99px;overflow:hidden;}
-.intro-bar-fill{height:100%;background:white;border-radius:99px;width:0%;transition:width 5s linear;}
-.intro-skip{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.6);font-size:12px;cursor:pointer;border:none;background:none;font-family:inherit;}
+/* 우리 단골 동네와 동일한 방식: 화면 전체 이미지 인트로 + 0.5초 페이드아웃 */
+#intro{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.5s ease;}
+#intro.fade-out{opacity:0;pointer-events:none;}
+#intro img{display:block;width:100%;height:100%;object-fit:cover;}
 #app{position:fixed;inset:0;display:flex;flex-direction:column;background:#f5f7fa;visibility:hidden;opacity:0;transition:opacity 0.5s ease;}
 #app.show{visibility:visible;opacity:1;}
 .screen{display:none;flex-direction:column;flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
@@ -167,16 +153,7 @@ html,body{width:100%;height:100%;font-family:'Noto Sans KR',sans-serif;backgroun
 <body>
 
 <div id="intro">
-  <div class="intro-logo">착한<span>고용</span></div>
-  <div class="intro-sub">광주 서구청 소상공인<br>경영비 스마트 지원 플랫폼</div>
-  <div class="intro-features">
-    <div class="intro-feat"><i class="ti ti-shield-check"></i><div class="intro-feat-text"><div class="ft">자동 자격 심사</div><div class="fd">국세청·보험공단 데이터 실시간 연동</div></div></div>
-    <div class="intro-feat"><i class="ti ti-lock"></i><div class="intro-feat-text"><div class="ft">용도 지정 결제(Lock-in)</div><div class="fd">인건비·임대료·공과금에만 사용 가능</div></div></div>
-    <div class="intro-feat"><i class="ti ti-users"></i><div class="intro-feat-text"><div class="ft">가족 근로 검증</div><div class="fd">4대 보험 이력으로 과학적 인증</div></div></div>
-    <div class="intro-feat"><i class="ti ti-chart-bar"></i><div class="intro-feat-text"><div class="ft">혜택 실시간 시각화</div><div class="fd">결제마다 정부 지원 절감액 즉시 확인</div></div></div>
-  </div>
-  <div class="intro-bar"><div class="intro-bar-fill" id="intro-bar"></div></div>
-  <button class="intro-skip" onclick="skipIntro()">건너뛰기</button>
+  <img src="intro.png" alt="착한고용 시작 화면">
 </div>
 
 <div id="app">
@@ -576,21 +553,21 @@ function updateHistoryUI(){
   renderHistory();
 }
 
-// ── 인트로 ──
+// ── 인트로: 2초 이미지 표시 후 0.5초 페이드아웃 ──
 window.addEventListener('DOMContentLoaded', ()=>{
-  document.getElementById('intro-bar').style.width = '100%';
-  setTimeout(()=>skipIntro(), 5200);
+  setTimeout(()=>skipIntro(), 2000);
   updateHomeUI();
   renderHistory();
 });
 
 function skipIntro(){
   const intro = document.getElementById('intro');
+  if (!intro || intro.classList.contains('fade-out')) return;
+  document.getElementById('app').classList.add('show');
   intro.classList.add('fade-out');
   setTimeout(()=>{
     intro.style.display='none';
-    document.getElementById('app').classList.add('show');
-  },600);
+  },500);
 }
 
 // ── 화면 전환 ──
