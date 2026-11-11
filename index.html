@@ -198,9 +198,42 @@ html, body {
 #toast {
   max-width: min(456px, calc(100vw - 24px));
 }
+
+/* 1단계: 원래 사용하던 intro.png 이미지 2초 표시. 2단계는 기존 기능 소개 인트로. */
+#image-intro {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  right: auto;
+  width: 100%;
+  max-width: 480px;
+  height: 100dvh;
+  transform: translateX(-50%);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #f0f9f4;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+#image-intro img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#image-intro.image-intro-hide { opacity: 0; pointer-events: none; }
+/* 기능 소개 인트로는 이미지가 끝나기 전까지 숨김 */
+#intro { visibility: hidden; }
+#intro.feature-intro-active { visibility: visible; }
+#intro .intro-feat { animation-play-state: paused; }
+#intro.feature-intro-active .intro-feat { animation-play-state: running; }
 </style>
 </head>
 <body>
+
+<!-- 1단계: 기존 intro.png 이미지 인트로 (2초 표시 + 0.5초 전환) -->
+<div id="image-intro" aria-label="착한고용 시작 이미지">
+  <img src="intro.png" alt="착한고용 시작 화면" fetchpriority="high">
+</div>
 
 <div id="intro">
   <div class="intro-logo">착한<span>고용</span></div>
@@ -612,12 +645,25 @@ function updateHistoryUI(){
   renderHistory();
 }
 
-// ── 인트로: 원본 디자인 및 5.2초 진행바 복원 ──
+// ── 인트로 순서: 이미지 2초 → 기능 안내 5.2초 → 사이트 홈 ──
 window.addEventListener('DOMContentLoaded', ()=>{
-  document.getElementById('intro-bar').style.width = '100%';
-  setTimeout(()=>skipIntro(), 5200);
   updateHomeUI();
   renderHistory();
+
+  // ① 이미지 인트로 2초간 온전히 표시한 다음 0.5초 동안 사라집니다.
+  setTimeout(()=>{
+    const imageIntro = document.getElementById('image-intro');
+    const featureIntro = document.getElementById('intro');
+    featureIntro.classList.add('feature-intro-active');
+    imageIntro.classList.add('image-intro-hide');
+
+    // ② 이미지가 사라진 뒤 기존 기능 소개 화면의 5.2초 진행을 시작합니다.
+    setTimeout(()=>{
+      imageIntro.style.display = 'none';
+      document.getElementById('intro-bar').style.width = '100%';
+      setTimeout(()=>skipIntro(), 5200);
+    }, 500);
+  }, 2000);
 });
 
 function skipIntro(){
